@@ -2,6 +2,8 @@
 
 - No reco cli
 - Following [this tutorial](https://blog.devgenius.io/convert-your-react-application-to-an-andriod-ios-app-using-cordova-87646729c2b7)
+- Cordova doc: https://cordova.apache.org/docs/en/latest/
+- Cordova indexDB: https://cordova.apache.org/docs/en/11.x/cordova/storage/storage.html#indexeddb
 
 ## Requirements to build apk
 
