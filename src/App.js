@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "akvo-react-form/dist/index.css"; /* REQUIRED */
+import { Webform } from "akvo-react-form";
+import * as forms from "./example.json";
+import * as cascade from "./example-cascade.json";
+import * as tree_option from "./example-tree-select.json";
 
-function App() {
+const formData = {
+  ...forms.default,
+  cascade: { administration: cascade.default },
+  tree: { administration: tree_option.default },
+};
+
+const App = () => {
+  const onChange = ({ current, values, progress }) => {
+    console.log(progress);
+  };
+  const onFinish = (values) => {
+    console.log(values);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="full-width">
+      <Webform forms={formData} onChange={onChange} onFinish={onFinish} />
     </div>
   );
-}
+};
 
 export default App;
