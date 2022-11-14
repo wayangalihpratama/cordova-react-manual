@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "akvo-react-form/dist/index.css"; /* REQUIRED */
 import { Webform } from "akvo-react-form";
@@ -14,24 +14,22 @@ const formData = {
 };
 
 const App = () => {
+  const token = process.env.REACT_APP_TOKEN;
+  const [webformJson, setWebformJson] = useState({});
+
   useEffect(() => {
     axios
-      // .get("/api/v1/levels?format=json", {
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json; charset=utf-8",
-      //   },
-      // })
-      .get("https://jsonplaceholder.typicode.com/todos/1")
-      .then((res) => alert(JSON.stringify(res.data)))
+      .get("https://jmp-explorer.akvotest.org/api/webform/567420197", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json; charset=utf-8",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => setWebformJson(res.data))
       .catch((e) => {
-        alert(e);
-        const { status, statusText, message } = e.response;
-        alert(`${status} - ${statusText} - ${message}`);
+        console.error(e);
       });
-    // fetch("/api/v1/levels?format=json")
-    //   .then((res) => res.json())
-    //   .then((data) => alert(JSON.stringify(data)));
   }, []);
 
   const onChange = ({ current, values, progress }) => {
@@ -42,7 +40,11 @@ const App = () => {
   };
   return (
     <div className="full-width">
-      <Webform forms={formData} onChange={onChange} onFinish={onFinish} />
+      {Object.keys(webformJson).length ? (
+        <Webform forms={webformJson} onChange={onChange} onFinish={onFinish} />
+      ) : (
+        <h1>Loading..</h1>
+      )}
     </div>
   );
 };
