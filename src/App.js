@@ -1,62 +1,39 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import "akvo-react-form/dist/index.css"; /* REQUIRED */
-import { Webform } from "akvo-react-form";
-import * as forms from "./example.json";
-import * as cascade from "./example-cascade.json";
-import * as tree_option from "./example-tree-select.json";
 import { api } from "./lib";
-
-const formData = {
-  ...forms.default,
-  cascade: { administration: cascade.default },
-  tree: { administration: tree_option.default },
-};
+import { Form } from "./components";
+import { Row, Select, Card } from "antd";
 
 const App = () => {
-  const formId = 567420197;
   const token = process.env.REACT_APP_TOKEN;
-  const [webformJson, setWebformJson] = useState({});
+  const [forms, setForms] = useState([]);
+  const [selectedForm, setSelectedForm] = useState(null);
 
   useEffect(() => {
     api.setToken(token);
     api
-      .get(`/webform/${formId}`)
-      .then((res) => setWebformJson(res.data))
-      .catch((e) => {
-        console.error(e);
-      });
-  }, []);
-
-  const onChange = ({ current, values, progress }) => {
-    console.info(progress);
-  };
-
-  const onFinish = (values) => {
-    const data = Object.keys(values)
-      .map((v) => {
-        // do not transfrom datapoint to post params
-        if (values[v] && v !== "datapoint") {
-          return { question: parseInt(v), value: values[v] };
-        }
-        return false;
+      .get(`/form`)
+      .then((res) => {
+        setForms(res.data.map((x) => ({ label: x.name, value: x.id })));
       })
-      .filter((x) => x);
-    api
-      .post(`data/form/${formId}`, data)
-      .then((res) => alert(`Data submitted.`))
-      .catch((e) => {
-        console.error(e);
-        alert(`Failed to submit data`);
-      });
-  };
+      .catch((e) => console.error(e));
+  }, []);
 
   return (
     <div className="full-width">
-      {Object.keys(webformJson).length ? (
-        <Webform forms={webformJson} onChange={onChange} onFinish={onFinish} />
-      ) : (
-        <h1>Loading..</h1>
+      {!selectedForm && (
+        <Row className="form-select-wrapper" align="middle" justify="center">
+          <Card className="card-wrapper" title="Select Form">
+            <Select
+              className="select-dropdown"
+              options={forms}
+              onChange={setSelectedForm}
+            />
+          </Card>
+        </Row>
+      )}
+      {selectedForm && (
+        <Form formId={selectedForm} setSelectedForm={setSelectedForm} />
       )}
     </div>
   );
