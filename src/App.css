@@ -22,7 +22,7 @@
 }
 
 .webform-wrapper {
-  margin-top: 70px;
+  margin-top: 0;
 }
 
 .ant-layout-header {
@@ -47,7 +47,8 @@
 }
 
 .ant-layout-header,
-.ant-layout-footer {
+.ant-layout-footer,
+.tabbar {
   background-color: #fff !important;
   position: fixed;
   left: 0;
@@ -61,7 +62,7 @@
 
 .arf-mobile-footer-container {
   position: fixed !important;
-  bottom: 60px !important;
+  bottom: 0 !important;
 }
 
 .message {
