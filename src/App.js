@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { api } from "./lib";
-import { Form } from "./components";
-import { Layout, Row, Col, Select, Card } from "antd";
+import { TabPage, Form } from "./components";
 
-const { Header, Footer, Content } = Layout;
+import {
+  Page,
+  Toolbar,
+  Icon,
+  BackButton,
+  ToolbarButton,
+  Tabbar,
+  Tab,
+  Button,
+  Select,
+} from "react-onsenui";
 
 const App = () => {
   const token = process.env.REACT_APP_TOKEN;
@@ -22,49 +31,68 @@ const App = () => {
   }, []);
 
   return (
-    <div className="full-width">
-      <Layout>
-        <Header>
-          <h1>JMP - Explorer</h1>
-        </Header>
-        <Content>
-          {!selectedForm && (
-            <Row
-              className="form-select-wrapper"
-              align="middle"
-              justify="center"
-            >
-              <Card className="card-wrapper" title="Select Form">
-                <Select
-                  className="select-dropdown"
-                  options={forms}
-                  onChange={setSelectedForm}
-                />
-              </Card>
-            </Row>
-          )}
-          {selectedForm && (
-            <Form formId={selectedForm} setSelectedForm={setSelectedForm} />
-          )}
-        </Content>
-        <Footer>
-          <Row align="middle" justify="space-between" gutter={[12, 12]}>
-            <Col align="center" span={6}>
-              <a href="#">Tab 1</a>
-            </Col>
-            <Col align="center" span={6}>
-              <a href="#">Tab 2</a>
-            </Col>
-            <Col align="center" span={6}>
-              <a href="#">Tab 3</a>
-            </Col>
-            <Col align="center" span={6}>
-              <a href="#">Tab 4</a>
-            </Col>
-          </Row>
-        </Footer>
-      </Layout>
-    </div>
+    <Page
+      renderToolbar={() => (
+        <Toolbar>
+          <div className="left">
+            <BackButton>Back</BackButton>
+          </div>
+          <div className="center">JMP - Explorer</div>
+          <div className="right">
+            <ToolbarButton>
+              <Icon icon="md-menu" />
+            </ToolbarButton>
+          </div>
+        </Toolbar>
+      )}
+    >
+      <Tabbar
+        position="bottom"
+        renderTabs={(activeIndex, tabbar) => [
+          {
+            content: (
+              <>
+                {!selectedForm && (
+                  <div className="form-select-wrapper">
+                    <Select
+                      modifier="material"
+                      onChange={(event) => setSelectedForm(event.target.value)}
+                      value={selectedForm}
+                    >
+                      {forms.map((f, fi) => (
+                        <option
+                          key={`${f.value} - ${fi} - ${f.label}`}
+                          value={f.value}
+                        >
+                          {f.label}
+                        </option>
+                      ))}
+                    </Select>
+                  </div>
+                )}
+                {selectedForm && (
+                  <Form
+                    formId={selectedForm}
+                    setSelectedForm={setSelectedForm}
+                  />
+                )}
+              </>
+            ),
+            tab: <Tab key={activeIndex} label="Home" icon="md-home" />,
+          },
+          {
+            content: (
+              <TabPage
+                title="Settings"
+                active={activeIndex === 1}
+                tabbar={tabbar}
+              />
+            ),
+            tab: <Tab key={activeIndex} label="Settings" icon="md-settings" />,
+          },
+        ]}
+      />
+    </Page>
   );
 };
 
