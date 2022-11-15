@@ -63,3 +63,7 @@
   position: fixed !important;
   bottom: 60px !important;
 }
+
+.message {
+  margin-top: 70px;
+}

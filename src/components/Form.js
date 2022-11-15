@@ -44,14 +44,17 @@ const Form = ({ formId, setSelectedForm }) => {
     api
       .post(`data/form/${formId}`, data)
       .then(() => {
-        message.success(`Data submitted.`);
+        message.success({ content: `Data submitted.`, className: "message" });
         setTimeout(() => {
           setSelectedForm(null);
         }, 500);
       })
       .catch((e) => {
         console.error(e);
-        message.error(`Failed to submit data`);
+        message.error({
+          content: `Failed to submit data.`,
+          className: "message",
+        });
       })
       .finally(() => setLoading(false));
   };
