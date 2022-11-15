@@ -57,7 +57,7 @@ const Form = ({ formId, setSelectedForm }) => {
   };
 
   return (
-    <div>
+    <div className="webform-wrapper">
       {Object.keys(webformJson).length ? (
         <Webform
           forms={webformJson}

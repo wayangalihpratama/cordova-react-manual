@@ -4,7 +4,7 @@
 }
 
 .loading-wrapper {
-  margin-top: 30%;
+  margin-top: 25%;
 }
 
 .select-dropdown {
@@ -12,11 +12,54 @@
 }
 
 .form-select-wrapper {
-  margin-top: 30%;
+  margin-top: 25%;
   margin-right: 15%;
   margin-left: 15%;
 }
 
 .card-wrapper {
   width: 100%;
+}
+
+.webform-wrapper {
+  margin-top: 70px;
+}
+
+.ant-layout-header {
+  top: 0;
+  padding: 0 20px !important;
+  -webkit-box-shadow: 0px -2px 5px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px -2px 5px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px -2px 5px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ant-layout-content {
+  min-height: 105vh !important;
+  background-color: #fff !important;
+}
+
+.ant-layout-footer {
+  bottom: 0;
+  padding: 20px !important;
+  -webkit-box-shadow: 0px 2px 5px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 2px 5px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 5px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ant-layout-header,
+.ant-layout-footer {
+  background-color: #fff !important;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.arf-container form {
+  min-height: calc(100% + (25vh + 50vw));
+}
+
+.arf-mobile-footer-container {
+  position: fixed !important;
+  bottom: 60px !important;
 }
