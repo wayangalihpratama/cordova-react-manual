@@ -78,16 +78,16 @@ const App = () => {
             ),
             tab: <Tab key={activeIndex} label="Home" icon="md-home" />,
           },
-          // {
-          //   content: (
-          //     <TabPage
-          //       title="Settings"
-          //       active={activeIndex === 1}
-          //       tabbar={tabbar}
-          //     />
-          //   ),
-          //   tab: <Tab key={activeIndex} label="Settings" icon="md-settings" />,
-          // },
+          {
+            content: (
+              <TabPage
+                title="Settings"
+                active={activeIndex === 1}
+                tabbar={tabbar}
+              />
+            ),
+            tab: <Tab key={activeIndex} label="Settings" icon="md-settings" />,
+          },
         ]}
       />
     </Page>
