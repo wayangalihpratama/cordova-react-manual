@@ -11,8 +11,8 @@ import {
   ToolbarButton,
   Tabbar,
   Tab,
-  Button,
-  Select,
+  List,
+  ListItem,
 } from "react-onsenui";
 
 const App = () => {
@@ -45,6 +45,7 @@ const App = () => {
           </div>
         </Toolbar>
       )}
+      onDeviceBackButton={() => setSelectedForm(null)}
     >
       <Tabbar
         position="bottom"
@@ -54,20 +55,17 @@ const App = () => {
               <>
                 {!selectedForm && (
                   <div className="form-select-wrapper">
-                    <Select
-                      modifier="material"
-                      onChange={(event) => setSelectedForm(event.target.value)}
-                      value={selectedForm}
-                    >
-                      {forms.map((f, fi) => (
-                        <option
+                    <List
+                      dataSource={forms}
+                      renderRow={(f, fi) => (
+                        <ListItem
                           key={`${f.value} - ${fi} - ${f.label}`}
-                          value={f.value}
+                          onClick={() => setSelectedForm(f.value)}
                         >
                           {f.label}
-                        </option>
-                      ))}
-                    </Select>
+                        </ListItem>
+                      )}
+                    />
                   </div>
                 )}
                 {selectedForm && (
@@ -80,16 +78,16 @@ const App = () => {
             ),
             tab: <Tab key={activeIndex} label="Home" icon="md-home" />,
           },
-          {
-            content: (
-              <TabPage
-                title="Settings"
-                active={activeIndex === 1}
-                tabbar={tabbar}
-              />
-            ),
-            tab: <Tab key={activeIndex} label="Settings" icon="md-settings" />,
-          },
+          // {
+          //   content: (
+          //     <TabPage
+          //       title="Settings"
+          //       active={activeIndex === 1}
+          //       tabbar={tabbar}
+          //     />
+          //   ),
+          //   tab: <Tab key={activeIndex} label="Settings" icon="md-settings" />,
+          // },
         ]}
       />
     </Page>

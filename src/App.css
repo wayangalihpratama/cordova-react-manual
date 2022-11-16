@@ -11,42 +11,43 @@
   width: 100%;
 }
 
-.form-select-wrapper {
+/* .form-select-wrapper {
   margin-top: 25%;
   margin-right: 15%;
   margin-left: 15%;
-}
+} */
 
-.card-wrapper {
+/* .card-wrapper {
   width: 100%;
-}
+} */
 
 .webform-wrapper {
   margin-top: 0;
+  overflow: auto !important;
 }
 
-.ant-layout-header {
+/* .ant-layout-header {
   top: 0;
   padding: 0 20px !important;
   -webkit-box-shadow: 0px -2px 5px 4px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px -2px 5px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 0px -2px 5px 4px rgba(0, 0, 0, 0.2);
-}
+} */
 
-.ant-layout-content {
+/* .ant-layout-content {
   min-height: 105vh !important;
   background-color: #fff !important;
-}
+} */
 
-.ant-layout-footer {
+/* .ant-layout-footer {
   bottom: 0;
   padding: 20px !important;
   -webkit-box-shadow: 0px 2px 5px 4px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 2px 5px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 5px 4px rgba(0, 0, 0, 0.2);
-}
+} */
 
-.ant-layout-header,
+/* .ant-layout-header,
 .ant-layout-footer,
 .tabbar {
   background-color: #fff !important;
@@ -54,7 +55,7 @@
   left: 0;
   width: 100%;
   z-index: 9999;
-}
+} */
 
 .arf-container form {
   min-height: calc(100% + (25vh + 50vw));
